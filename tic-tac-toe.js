@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const board = document.getElementById('board');
   const squares = board.querySelectorAll('div');
   const status = document.getElementById('status');
+
   let currentPlayer = 'X';
   var gameState = ['', '', '', '', '', '', '', '', ''];
 
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
           status.classList.add('you-won');
           status.textContent = `Congratulations! ${currentPlayer} is the Winner!`;
           console.log('Game Over');
+          newGame();
         }
 
         currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
@@ -35,6 +37,31 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+function newGame(){
+  const newGamebtn = document.querySelector('.btn');
+  newGamebtn.addEventListener("click", function(){ 
+    resetGame();
+  });
+}
+
+function resetGame(){
+  const squares = board.querySelectorAll('div');
+
+  squares.forEach(function(square) {
+    square.classList.remove('X', 'O');
+    square.textContent = '';
+  });
+
+  gameState = ['', '', '', '', '', '', '', '', ''];
+
+  const status = document.getElementById('status');
+  status.textContent = "Move your mouse over a square and click to play an X or an O.";
+  status.classList.remove("you-won");
+
+  currentPlayer = 'X';
+
+}
+
 function isGameOver(gameState) {
   // Check for a win
   const winningCombinations = [
@@ -48,11 +75,6 @@ function isGameOver(gameState) {
     if (gameState[a] && gameState[a] === gameState[b] && gameState[b] === gameState[c]) {
       return true; // A player has won
     }
-  }
-
-  // Check for a tie
-  if (gameState.every(square => square === 'X' || square === 'O')) {
-    return true; // It's a tie
   }
 
   return false; // Game is not over
