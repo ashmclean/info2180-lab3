@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   const board = document.getElementById('board');
   const squares = board.querySelectorAll('div');
+  const status = document.getElementById('status');
   let currentPlayer = 'X';
   var gameState = ['', '', '', '', '', '', '', '', ''];
 
@@ -14,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         gameState[index] = currentPlayer;
 
         if (isGameOver(gameState)) {
+          status.classList.add('you-won');
+          status.textContent = `Congratulations! ${currentPlayer} is the Winner!`;
           console.log('Game Over');
         }
 
