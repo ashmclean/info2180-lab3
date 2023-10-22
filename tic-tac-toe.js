@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
           status.classList.add('you-won');
           status.textContent = `Congratulations! ${currentPlayer} is the Winner!`;
           console.log('Game Over');
+
           newGame();
         }
 
@@ -55,9 +56,12 @@ function resetGame(){
   gameState = ['', '', '', '', '', '', '', '', ''];
 
   const status = document.getElementById('status');
+
+  // Reset status message
   status.textContent = "Move your mouse over a square and click to play an X or an O.";
   status.classList.remove("you-won");
 
+  //Reset current player to 'X'
   currentPlayer = 'X';
 
 }
